@@ -3,7 +3,7 @@ import { cryptoConverter, getPrices } from "../src/utils";
 
 let prices: Array<Currency> = [];
 
-const findCurrency = (currencies: Array<Currency>, currency: string) => currencies.find((crc) => crc.key === currency);
+const findCurrency = (currencies: Array<Currency>, currency: string): Currency => currencies.find((crc) => crc.key === currency);
 
 const FROM = "ethereum"
 const TO = "vvs-finance"

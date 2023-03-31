@@ -21,3 +21,13 @@ Run test
 ```
 npm run test
 ```
+
+# Curl example
+```
+curl --location 'http://localhost:5000/currency/convert?from=ethereum&to=vvs-finance&amount=0.5'
+```
+
+# OpenAPI url
+```
+http://localhost:5000/docs
+```

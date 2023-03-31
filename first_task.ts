@@ -27,11 +27,11 @@ const coinsAvailability = (coins: any, request: Array<string>) => {
             return coin
         });
 
-        let combinationAvailable = true;
+        let combinationAvailable: boolean = true;
 
         // Count the amount of coins is array and check if such amount acceptable
         Object.keys(coins).forEach(coin_name => {
-            var re = new RegExp(coin_name, 'g');
+            var re: RegExp = new RegExp(coin_name, 'g');
             // @ts-ignore
             if (requestVariation.join(' ').match(re)?.length > coins[coin_name] ) {
                 combinationAvailable = false
