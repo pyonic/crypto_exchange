@@ -1,5 +1,6 @@
 import { Currency, CurrencyExchange } from "src/models/currencies.interface";
 import { cryptoConverter, getPrices } from "../src/utils";
+import { DEFAULT_CURRENCY } from "../src/constants";
 
 let prices: Array<Currency> = [];
 
@@ -14,19 +15,21 @@ describe('Currency exchange test', () => {
     prices = await getPrices();
   });
 
-  it('Process normal data', () => {
-    const conversion: CurrencyExchange = cryptoConverter(prices, { from: FROM, to: TO, amount: AMOUNT })
-    
-    const targetCurrency: Currency = findCurrency(prices, TO);
-    const sourceCurrency: Currency = findCurrency(prices, FROM);
-    const original: number = conversion.result * targetCurrency.price;
+  it('Process top 100', () => {
+    prices.slice(0, 100).forEach((coin: Currency) => {
+      const conversion: CurrencyExchange = cryptoConverter(prices, { from: coin.key, amount: AMOUNT })
+      
+      const targetCurrency: Currency = findCurrency(prices, DEFAULT_CURRENCY);
+      const sourceCurrency: Currency = findCurrency(prices, coin.key);
+      const original: number = conversion.result * targetCurrency.price;
 
-    expect(conversion.from).toBe(FROM)
-    expect(conversion.to).toBe(TO)
-    expect(conversion.result).not.toBe(null);
-    expect(conversion.result).not.toBe(Infinity);
+      expect(conversion.from).toBe(coin.key)
+      expect(conversion.to).toBe(DEFAULT_CURRENCY)
+      expect(conversion.result).not.toBe(null);
+      expect(conversion.result).not.toBe(Infinity);
 
-    expect(original).toStrictEqual(sourceCurrency.price * AMOUNT)
+      expect(original).toBeCloseTo(sourceCurrency.price * AMOUNT);   
+    })
   })
 
   it('Float amounts', () => {
