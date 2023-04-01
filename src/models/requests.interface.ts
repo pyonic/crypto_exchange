@@ -1,3 +1,3 @@
 export interface PricesResult {
-    body: object
+  body: object;
 }

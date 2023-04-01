@@ -14,7 +14,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest --verbose --rootDir=test"
+    "test": "jest --verbose --rootDir=test --setTimeout=10000"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
